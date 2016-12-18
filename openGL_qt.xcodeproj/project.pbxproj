@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		18B081E01E06826A00669944 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18B081DF1E06826A00669944 /* main.cpp */; };
+		18B081FB1E068CB000669944 /* libGLEW.2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B081FA1E068CB000669944 /* libGLEW.2.0.0.dylib */; };
+		18B082051E0693AC00669944 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B082021E0693AC00669944 /* QtCore.framework */; };
+		18B082061E0693AC00669944 /* QtGui.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B082031E0693AC00669944 /* QtGui.framework */; };
+		18B082071E0693AC00669944 /* QtWidgets.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B082041E0693AC00669944 /* QtWidgets.framework */; };
+		18B0820B1E06947600669944 /* GlWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18B082091E06947600669944 /* GlWindow.cpp */; };
+		18B0820D1E0694A400669944 /* QtOpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B0820C1E0694A400669944 /* QtOpenGL.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +31,13 @@
 /* Begin PBXFileReference section */
 		18B081DC1E06826A00669944 /* openGL_qt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openGL_qt; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B081DF1E06826A00669944 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		18B081FA1E068CB000669944 /* libGLEW.2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.0.0.dylib; path = ../../../../../usr/local/Cellar/glew/2.0.0/lib/libGLEW.2.0.0.dylib; sourceTree = "<group>"; };
+		18B082021E0693AC00669944 /* QtCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtCore.framework; path = "../../../../../usr/local/Cellar/qt@5.5/5.5.1/lib/QtCore.framework"; sourceTree = "<group>"; };
+		18B082031E0693AC00669944 /* QtGui.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtGui.framework; path = "../../../../../usr/local/Cellar/qt@5.5/5.5.1/lib/QtGui.framework"; sourceTree = "<group>"; };
+		18B082041E0693AC00669944 /* QtWidgets.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtWidgets.framework; path = "../../../../../usr/local/Cellar/qt@5.5/5.5.1/lib/QtWidgets.framework"; sourceTree = "<group>"; };
+		18B082091E06947600669944 /* GlWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlWindow.cpp; sourceTree = "<group>"; };
+		18B0820A1E06947600669944 /* GlWindow.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GlWindow.hpp; sourceTree = "<group>"; };
+		18B0820C1E0694A400669944 /* QtOpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtOpenGL.framework; path = "../../../../../usr/local/Cellar/qt@5.5/5.5.1/lib/QtOpenGL.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +45,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B0820D1E0694A400669944 /* QtOpenGL.framework in Frameworks */,
+				18B082051E0693AC00669944 /* QtCore.framework in Frameworks */,
+				18B082061E0693AC00669944 /* QtGui.framework in Frameworks */,
+				18B082071E0693AC00669944 /* QtWidgets.framework in Frameworks */,
+				18B081FB1E068CB000669944 /* libGLEW.2.0.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +61,7 @@
 			children = (
 				18B081DE1E06826A00669944 /* openGL_qt */,
 				18B081DD1E06826A00669944 /* Products */,
+				18B081E61E06861000669944 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,9 +76,31 @@
 		18B081DE1E06826A00669944 /* openGL_qt */ = {
 			isa = PBXGroup;
 			children = (
+				18B082081E06946200669944 /* src */,
 				18B081DF1E06826A00669944 /* main.cpp */,
 			);
 			path = openGL_qt;
+			sourceTree = "<group>";
+		};
+		18B081E61E06861000669944 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				18B0820C1E0694A400669944 /* QtOpenGL.framework */,
+				18B082021E0693AC00669944 /* QtCore.framework */,
+				18B082031E0693AC00669944 /* QtGui.framework */,
+				18B082041E0693AC00669944 /* QtWidgets.framework */,
+				18B081FA1E068CB000669944 /* libGLEW.2.0.0.dylib */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		18B082081E06946200669944 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				18B082091E06947600669944 /* GlWindow.cpp */,
+				18B0820A1E06947600669944 /* GlWindow.hpp */,
+			);
+			name = src;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -119,6 +160,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18B0820B1E06947600669944 /* GlWindow.cpp in Sources */,
 				18B081E01E06826A00669944 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -216,6 +258,16 @@
 		18B081E41E06826A00669944 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "/usr/local/Cellar/qt@5.5/5.5.1/lib";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/glm/0.9.8.3/include,
+					/Users/apple/Qt/5.7/clang_64/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.0.0/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -223,6 +275,16 @@
 		18B081E51E06826A00669944 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = "/usr/local/Cellar/qt@5.5/5.5.1/lib";
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/glm/0.9.8.3/include,
+					/Users/apple/Qt/5.7/clang_64/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/glew/2.0.0/lib,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -246,6 +308,7 @@
 				18B081E51E06826A00669944 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
