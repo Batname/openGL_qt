@@ -1,9 +1,5 @@
 #include <iostream>
 
-// GLEW
-#define GLEW_STATIC
-#include <GL/glew.h>
-
 // GLM
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
