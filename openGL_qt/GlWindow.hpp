@@ -2,6 +2,7 @@
 #define GlWindow_hpp
 
 #include <iostream>
+#include <fstream>
 
 // GLEW
 #define GLEW_STATIC
@@ -20,6 +21,7 @@ public:
 private:
     void sendDataToOpenGL();
     void installShaders();
+    std::string readShaderCode(const char * filePath);
     
     GLuint ProgramID;
 };

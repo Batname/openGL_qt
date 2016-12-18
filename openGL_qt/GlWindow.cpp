@@ -2,23 +2,19 @@
 
 using namespace std;
 
-// Shaders
-const GLchar* vertexShaderCode = "#version 330 core\n"
-"layout (location = 0) in vec2 position;\n"
-"layout (location = 1) in vec3 color;\n"
-"out vec3 ourColor;\n"
-"void main()\n"
-"{\n"
-"gl_Position = vec4(position.x, position.y, 1.0, 1.0);\n"
-"ourColor = color;\n"
-"}\0";
-const GLchar* fragmentShaderCode = "#version 330 core\n"
-"in vec3 ourColor;\n"
-"out vec4 color;\n"
-"void main()\n"
-"{\n"
-"color = vec4(ourColor, 1.0f);\n"
-"}\n\0";
+std::string GlWindow::readShaderCode(const char * filePath)
+{
+    ifstream meInput(filePath);
+    
+    if (!meInput.good()) {
+        exit(EXIT_FAILURE);
+    }
+    
+    return std::string(
+       std::istreambuf_iterator<char>(meInput),
+       std::istreambuf_iterator<char>()
+    );
+}
 
 void GlWindow::installShaders()
 {
@@ -29,9 +25,13 @@ void GlWindow::installShaders()
     GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
     
     const char *adapter[1];
-    adapter[0] = vertexShaderCode;
+    
+    string vShaderCode = readShaderCode("res/shaders/core.vs");
+    string fShaderCode = readShaderCode("res/shaders/core.frag");
+    
+    adapter[0] = vShaderCode.c_str();
     glShaderSource(vertexShaderID, 1, adapter, nullptr);
-    adapter[0] = fragmentShaderCode;
+    adapter[0] = fShaderCode.c_str();
     glShaderSource(fragmentShaderID, 1, adapter, 0);
     
     glCompileShader(vertexShaderID);
@@ -65,15 +65,13 @@ void GlWindow::installShaders()
 void GlWindow::sendDataToOpenGL()
 {
     GLfloat verts[] = {
-        +0.0f, +0.0f,   +1.0f, +0.0f, +0.0f,
-        +1.0f, +1.0f,   +1.0f, +0.0f, +0.0f,
-        -1.0f, +1.0f,   +1.0f, +0.0f, +0.0f,
-        -1.0f, -1.0f,   +1.0f, +0.0f, +0.0f,
-        +1.0f, -1.0f,   +1.0f, +0.0f, +0.0f
+        +0.0f, +1.0f,   +1.0f, +0.0f, +0.0f,
+        +1.0f, -1.0f,   +0.0f, +1.0f, +0.0f,
+        -1.0f, -1.0f,   +0.0f, +0.0f, +1.0f
     };
     
     GLuint indices[] = {
-        0, 1, 2, 0, 3, 4
+        0, 1, 2
     };
     
     GLuint VBO, VAO, EBO;
@@ -115,6 +113,6 @@ void GlWindow::paintGL()
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
 }
 
