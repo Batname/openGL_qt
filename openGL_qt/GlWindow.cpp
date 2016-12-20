@@ -89,8 +89,7 @@ void GlWindow::sendDataToOpenGL()
     glEnableVertexAttribArray(colorAttrib);
     
     // deallocate memory
-    free(tri.vertices);
-    free(tri.indices);
+    tri.clean();
 }
 
 void GlWindow::initializeGL()

@@ -23,6 +23,12 @@ struct ShapeData
     {
         return numIndices * sizeof(GLushort);
     }
+    
+    void clean()
+    {
+        free(vertices);
+        free(indices);
+    }
 };
 
 
