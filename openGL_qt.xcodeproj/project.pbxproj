@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		185DD02F1E09D83B0014CB12 /* ShapeGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 185DD02D1E09D83B0014CB12 /* ShapeGenerator.cpp */; };
 		18B081E01E06826A00669944 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18B081DF1E06826A00669944 /* main.cpp */; };
 		18B081FB1E068CB000669944 /* libGLEW.2.0.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B081FA1E068CB000669944 /* libGLEW.2.0.0.dylib */; };
 		18B082051E0693AC00669944 /* QtCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B082021E0693AC00669944 /* QtCore.framework */; };
@@ -32,6 +33,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		185DD02B1E09D59E0014CB12 /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		185DD02C1E09D6360014CB12 /* ShapeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShapeData.h; sourceTree = "<group>"; };
+		185DD02D1E09D83B0014CB12 /* ShapeGenerator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ShapeGenerator.cpp; sourceTree = "<group>"; };
+		185DD02E1E09D83B0014CB12 /* ShapeGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShapeGenerator.hpp; sourceTree = "<group>"; };
 		18B081DC1E06826A00669944 /* openGL_qt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openGL_qt; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B081DF1E06826A00669944 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		18B081FA1E068CB000669944 /* libGLEW.2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.0.0.dylib; path = ../../../../../usr/local/Cellar/glew/2.0.0/lib/libGLEW.2.0.0.dylib; sourceTree = "<group>"; };
@@ -62,6 +67,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		185DD02A1E09D5720014CB12 /* Primitives */ = {
+			isa = PBXGroup;
+			children = (
+				185DD02B1E09D59E0014CB12 /* Vertex.h */,
+				185DD02C1E09D6360014CB12 /* ShapeData.h */,
+				185DD02D1E09D83B0014CB12 /* ShapeGenerator.cpp */,
+				185DD02E1E09D83B0014CB12 /* ShapeGenerator.hpp */,
+			);
+			name = Primitives;
+			sourceTree = "<group>";
+		};
 		18B081D31E06826A00669944 = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +121,7 @@
 		18B082081E06946200669944 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				185DD02A1E09D5720014CB12 /* Primitives */,
 				18B082091E06947600669944 /* GlWindow.cpp */,
 				18B0820A1E06947600669944 /* GlWindow.hpp */,
 			);
@@ -168,6 +185,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185DD02F1E09D83B0014CB12 /* ShapeGenerator.cpp in Sources */,
 				18B0820B1E06947600669944 /* GlWindow.cpp in Sources */,
 				18B081E01E06826A00669944 /* main.cpp in Sources */,
 			);
