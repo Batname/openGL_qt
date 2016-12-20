@@ -19,11 +19,11 @@ ShapeData ShapeGenerator::makeTrianle()
     
     GLushort indices[] = { 0, 1, 2 };
     
-    ret.vertices = new Vertex[ret.numVertices];
+    ret.vertices = (Vertex*)malloc(sizeof(verts));
     memcpy(ret.vertices, verts, sizeof(verts));
 
     ret.numIndices = NUM_ARRAY_ELEMENTS(indices);
-    ret.indices = new GLushort[ret.numIndices];
+    ret.indices = (GLushort*)malloc(sizeof(indices));
     memcmp(ret.indices, indices, sizeof(indices));
     
     return ret;
