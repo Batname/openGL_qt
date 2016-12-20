@@ -65,15 +65,15 @@ void GlWindow::installShaders()
 void GlWindow::sendDataToOpenGL()
 {
     GLfloat verts[] = {
-        +0.0f, +1.0f,   +1.0f, +0.0f, +0.0f,
-        +1.0f, -1.0f,   +0.0f, +1.0f, +0.0f,
-        -1.0f, -1.0f,   +0.0f, +0.0f, +1.0f
+        +0.0f, +1.0f, +0.5,     +1.0f, +0.0f, +0.0f,
+        +1.0f, -1.0f, +0.5,     +0.0f, +1.0f, +0.0f,
+        -1.0f, -1.0f, +0.5,     +0.0f, +0.0f, +1.0f
     };
     
-    GLuint indices[] = {
-        0, 1, 2
-    };
-    
+//    GLuint indices[] = {
+//        0, 1, 2
+//    };
+//    
     GLuint VBO, VAO, EBO;
     
     glGenBuffers(1, &VBO);
@@ -83,16 +83,16 @@ void GlWindow::sendDataToOpenGL()
     glBindVertexArray(VAO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW);
     
-    glGenBuffers(1, &EBO);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+//    glGenBuffers(1, &EBO);
+//    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+//    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     
     GLint positionAttrib = glGetAttribLocation(ProgramID, "position"); // 0
-    glVertexAttribPointer(positionAttrib, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)0);
+    glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(positionAttrib);
     
     GLint colorAttrib = glGetAttribLocation(ProgramID, "color"); // 0
-    glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), (GLvoid*)(2 * sizeof(GLfloat)));
+    glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(colorAttrib);
 }
 
@@ -102,6 +102,9 @@ void GlWindow::initializeGL()
     if (glewInit() != GLEW_OK) {
         cout << "Failed to inin glew with experemental"  << endl;
     }
+    
+    // openGl options
+    glEnable(GL_DEPTH_TEST);
     
     installShaders();
     sendDataToOpenGL();
@@ -113,6 +116,7 @@ void GlWindow::paintGL()
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+//    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
