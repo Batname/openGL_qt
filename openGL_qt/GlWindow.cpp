@@ -87,6 +87,10 @@ void GlWindow::sendDataToOpenGL()
     GLint colorAttrib = glGetAttribLocation(ProgramID, "color"); // 0
     glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(colorAttrib);
+    
+    // deallocate memory
+    free(tri.vertices);
+    free(tri.indices);
 }
 
 void GlWindow::initializeGL()
