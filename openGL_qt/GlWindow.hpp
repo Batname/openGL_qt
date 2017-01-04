@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cassert>
 
 // GLEW
 #define GLEW_STATIC

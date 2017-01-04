@@ -28,6 +28,8 @@ struct ShapeData
     {
         free(vertices);
         free(indices);
+        
+        numVertices = numIndices = 0;
     }
 };
 
