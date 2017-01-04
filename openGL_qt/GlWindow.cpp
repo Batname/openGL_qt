@@ -113,19 +113,6 @@ void GlWindow::paintGL()
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    // send uniform data
-    GLint dominatingColorLocation = glGetUniformLocation(ProgramID, "dominatingColor");
-    GLint yFlipUniformLocation = glGetUniformLocation(ProgramID, "yFlip");
-    
-    vec3 dominatingColor(1.0f, 0.0f, 0.0f);
-    glUniform3fv(dominatingColorLocation, 1, ((float*)(&dominatingColor) + 0) );
-    glUniform1f(yFlipUniformLocation, 1.0f);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-    
-    dominatingColor.r = 0.0f;
-    dominatingColor.b = 1.0f;
-    glUniform3fv(dominatingColorLocation, 1, ((float*)(&dominatingColor) + 0) );
-    glUniform1f(yFlipUniformLocation, -1.0f);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, 0);
 }
 

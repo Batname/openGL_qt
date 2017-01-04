@@ -24,7 +24,7 @@ ShapeData ShapeGenerator::makeTrianle()
 
     ret.numIndices = NUM_ARRAY_ELEMENTS(indices);
     ret.indices = (GLushort*)malloc(sizeof(indices));
-    memcmp(ret.indices, indices, sizeof(indices));
+    memcpy(ret.indices, indices, sizeof(indices));
     
     return ret;
 }
