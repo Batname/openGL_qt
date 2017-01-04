@@ -66,7 +66,7 @@ ShapeData ShapeGenerator::makeCube() {
         vec3(+0.5f, +0.7f, +0.3f), // Colour
         vec3(-1.0f, -1.0f, -1.0f), // 14
         vec3(+0.4f, +0.7f, +0.7f), // Colour
-        vec3(-1.0f, -1.0f, -1.0f), // 15
+        vec3(-1.0f, -1.0f, +1.0f), // 15
         vec3(+0.2f, +0.5f, +1.0f), // Colour
         
         vec3(+1.0f, +1.0f, +1.0f), // 16

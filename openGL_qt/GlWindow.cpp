@@ -117,11 +117,16 @@ void GlWindow::paintGL()
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 10.0f);
-    mat4 projectionTranslationMatrix = glm::translate(projectionMatrix, vec3(0.0f, 0.0f, -3.0f));
-    mat4 fullTransformMatrix = glm::rotate(projectionTranslationMatrix, glm::radians(54.0f), vec3(1.0f, 0.0f, 0.0f));
-    
     GLint fullTransformMatrixUniformLocation = glGetUniformLocation(ProgramID, "fullTransformMatrix");
+
+    mat4 fullTransformMatrix, translationMatrix, rotationMatrix;
+    mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 10.0f);
+    
+    /* ----- Cube 1 ----- */
+    translationMatrix = glm::translate(vec3(-1.0f, 0.0f, -3.0f));
+    rotationMatrix = glm::rotate(glm::radians(36.0f), vec3(1.0f, 0.0f, 0.0f));
+    
+    fullTransformMatrix = projectionMatrix * translationMatrix * rotationMatrix;
     
     glUniformMatrix4fv(
         fullTransformMatrixUniformLocation,
@@ -129,9 +134,25 @@ void GlWindow::paintGL()
         GL_FALSE,
         (float*)((vec4 *)(&fullTransformMatrix)) // == &fullTransformMatrix[0][0]
     );
-
     
     glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
+    /* ----- Cube 1 ----- */
+    
+    /* ----- Cube 2 ----- */
+    translationMatrix = glm::translate(vec3(1.0f, 0.0f, -3.75f));
+    rotationMatrix = glm::rotate(glm::radians(126.0f), vec3(0.0f, 1.0f, 0.0f));
+    
+    fullTransformMatrix = projectionMatrix * translationMatrix * rotationMatrix;
+    
+    glUniformMatrix4fv(
+        fullTransformMatrixUniformLocation,
+        1,
+        GL_FALSE,
+        (float*)((vec4 *)(&fullTransformMatrix)) // == &fullTransformMatrix[0][0]
+    );
+    
+    glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
+    /* ----- Cube 2 ----- */
 }
 
 GlWindow::~GlWindow() {
