@@ -17,6 +17,9 @@
 		18B0820D1E0694A400669944 /* QtOpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B0820C1E0694A400669944 /* QtOpenGL.framework */; };
 		18B0820F1E069AB800669944 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 18B0820E1E069AB800669944 /* OpenGL.framework */; };
 		18B082111E07051D00669944 /* res in CopyFiles */ = {isa = PBXBuildFile; fileRef = 18B082101E07051100669944 /* res */; };
+		18E586211E1CF52000D74E20 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E586201E1CF52000D74E20 /* main.cpp */; };
+		18E586261E1CF54D00D74E20 /* libgtest.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E586251E1CF54D00D74E20 /* libgtest.a */; };
+		18E586281E1CF64D00D74E20 /* StructTest.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18E586271E1CF64D00D74E20 /* StructTest.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -29,6 +32,15 @@
 				18B082111E07051D00669944 /* res in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18E5861C1E1CF52000D74E20 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -48,6 +60,10 @@
 		18B0820C1E0694A400669944 /* QtOpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QtOpenGL.framework; path = "../../../../../usr/local/Cellar/qt@5.5/5.5.1/lib/QtOpenGL.framework"; sourceTree = "<group>"; };
 		18B0820E1E069AB800669944 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
 		18B082101E07051100669944 /* res */ = {isa = PBXFileReference; lastKnownFileType = folder; path = res; sourceTree = "<group>"; };
+		18E5861E1E1CF52000D74E20 /* OpenGL_QT_Tests */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_QT_Tests; sourceTree = BUILT_PRODUCTS_DIR; };
+		18E586201E1CF52000D74E20 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		18E586251E1CF54D00D74E20 /* libgtest.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libgtest.a; path = ../../../../../usr/local/Cellar/gtest/libgtest.a; sourceTree = "<group>"; };
+		18E586271E1CF64D00D74E20 /* StructTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = StructTest.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +77,14 @@
 				18B082061E0693AC00669944 /* QtGui.framework in Frameworks */,
 				18B082071E0693AC00669944 /* QtWidgets.framework in Frameworks */,
 				18B081FB1E068CB000669944 /* libGLEW.2.0.0.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18E5861B1E1CF52000D74E20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18E586261E1CF54D00D74E20 /* libgtest.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,6 +106,7 @@
 			isa = PBXGroup;
 			children = (
 				18B081DE1E06826A00669944 /* openGL_qt */,
+				18E5861F1E1CF52000D74E20 /* OpenGL_QT_Tests */,
 				18B081DD1E06826A00669944 /* Products */,
 				18B081E61E06861000669944 /* Frameworks */,
 			);
@@ -91,6 +116,7 @@
 			isa = PBXGroup;
 			children = (
 				18B081DC1E06826A00669944 /* openGL_qt */,
+				18E5861E1E1CF52000D74E20 /* OpenGL_QT_Tests */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +134,7 @@
 		18B081E61E06861000669944 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				18E586251E1CF54D00D74E20 /* libgtest.a */,
 				18B0820E1E069AB800669944 /* OpenGL.framework */,
 				18B0820C1E0694A400669944 /* QtOpenGL.framework */,
 				18B082021E0693AC00669944 /* QtCore.framework */,
@@ -126,6 +153,15 @@
 				18B0820A1E06947600669944 /* GlWindow.hpp */,
 			);
 			name = src;
+			sourceTree = "<group>";
+		};
+		18E5861F1E1CF52000D74E20 /* OpenGL_QT_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				18E586201E1CF52000D74E20 /* main.cpp */,
+				18E586271E1CF64D00D74E20 /* StructTest.cpp */,
+			);
+			path = OpenGL_QT_Tests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +184,23 @@
 			productReference = 18B081DC1E06826A00669944 /* openGL_qt */;
 			productType = "com.apple.product-type.tool";
 		};
+		18E5861D1E1CF52000D74E20 /* OpenGL_QT_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18E586241E1CF52000D74E20 /* Build configuration list for PBXNativeTarget "OpenGL_QT_Tests" */;
+			buildPhases = (
+				18E5861A1E1CF52000D74E20 /* Sources */,
+				18E5861B1E1CF52000D74E20 /* Frameworks */,
+				18E5861C1E1CF52000D74E20 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OpenGL_QT_Tests;
+			productName = OpenGL_QT_Tests;
+			productReference = 18E5861E1E1CF52000D74E20 /* OpenGL_QT_Tests */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -158,6 +211,10 @@
 				ORGANIZATIONNAME = apple;
 				TargetAttributes = {
 					18B081DB1E06826A00669944 = {
+						CreatedOnToolsVersion = 8.1;
+						ProvisioningStyle = Automatic;
+					};
+					18E5861D1E1CF52000D74E20 = {
 						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Automatic;
 					};
@@ -176,6 +233,7 @@
 			projectRoot = "";
 			targets = (
 				18B081DB1E06826A00669944 /* openGL_qt */,
+				18E5861D1E1CF52000D74E20 /* OpenGL_QT_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -188,6 +246,15 @@
 				185DD02F1E09D83B0014CB12 /* ShapeGenerator.cpp in Sources */,
 				18B0820B1E06947600669944 /* GlWindow.cpp in Sources */,
 				18B081E01E06826A00669944 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		18E5861A1E1CF52000D74E20 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18E586281E1CF64D00D74E20 /* StructTest.cpp in Sources */,
+				18E586211E1CF52000D74E20 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +355,6 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/usr/local/Cellar/glm/0.9.8.3/include,
-					/Users/apple/Qt/5.7/clang_64/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -305,11 +371,40 @@
 				HEADER_SEARCH_PATHS = (
 					/usr/local/include,
 					/usr/local/Cellar/glm/0.9.8.3/include,
-					/Users/apple/Qt/5.7/clang_64/include,
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/local/Cellar/glew/2.0.0/lib,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		18E586221E1CF52000D74E20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/glm/0.9.8.3/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/gtest,
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		18E586231E1CF52000D74E20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/usr/local/include,
+					/usr/local/Cellar/glm/0.9.8.3/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/local/Cellar/gtest,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -335,6 +430,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		18E586241E1CF52000D74E20 /* Build configuration list for PBXNativeTarget "OpenGL_QT_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18E586221E1CF52000D74E20 /* Debug */,
+				18E586231E1CF52000D74E20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};

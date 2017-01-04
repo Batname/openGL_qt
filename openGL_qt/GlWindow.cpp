@@ -7,7 +7,7 @@ std::string GlWindow::readShaderCode(const char * filePath)
     ifstream meInput(filePath);
     
     if (!meInput.good()) {
-        exit(EXIT_FAILURE);
+        
     }
     
     return std::string(
