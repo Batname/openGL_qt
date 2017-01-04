@@ -114,24 +114,19 @@ void GlWindow::paintGL()
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    mat4 modelTransformMatrix = glm::translate(mat4(), vec3(0.0f, 0.0f, -3.0f));
+    mat4 translationMatrix = glm::translate(mat4(), vec3(0.0f, 0.0f, -3.0f));
+    mat4 rotationMatrix = glm::rotate(mat4(), glm::radians(54.0f), vec3(1.0f, 0.0f, 0.0f));
     mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 10.0f);
     
-    GLint modelTransformMatrixUniformLocation = glGetUniformLocation(ProgramID, "modelTransformMatrix");
-    GLint projectionMatrixUniformLocation = glGetUniformLocation(ProgramID, "projectionMatrix");
+    mat4 fullTransformMatrix = projectionMatrix * translationMatrix * rotationMatrix;
+    
+    GLint fullTransformMatrixUniformLocation = glGetUniformLocation(ProgramID, "fullTransformMatrix");
     
     glUniformMatrix4fv(
-        modelTransformMatrixUniformLocation,
+        fullTransformMatrixUniformLocation,
         1,
         GL_FALSE,
-        (float*)((vec4 *)(&modelTransformMatrix)) // == &modelTransformMatrix[0][0]
-    );
-    
-    glUniformMatrix4fv(
-        projectionMatrixUniformLocation,
-        1,
-        GL_FALSE,
-        &projectionMatrix[0][0]
+        (float*)((vec4 *)(&fullTransformMatrix)) // == &fullTransformMatrix[0][0]
     );
 
     
