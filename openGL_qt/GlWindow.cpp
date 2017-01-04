@@ -70,18 +70,19 @@ void GlWindow::sendDataToOpenGL()
     
     GLuint VBO, VAO, EBO;
     
-    ShapeData tri = ShapeGenerator::makeTrianle();
+    ShapeData shape = ShapeGenerator::makeCube();
+    numIndices = shape.numIndices;
     
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     
     glGenVertexArrays(1, &VAO);
     glBindVertexArray(VAO);
-    glBufferData(GL_ARRAY_BUFFER, tri.vertexBufferSize(), tri.vertices, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, shape.vertexBufferSize(), shape.vertices, GL_STATIC_DRAW);
     
     glGenBuffers(1, &EBO);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, tri.indexBufferSize(), tri.indices, GL_STATIC_DRAW);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, shape.indexBufferSize(), shape.indices, GL_STATIC_DRAW);
     
     GLint positionAttrib = glGetAttribLocation(ProgramID, "position"); // 0
     glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
@@ -92,7 +93,7 @@ void GlWindow::sendDataToOpenGL()
     glEnableVertexAttribArray(colorAttrib);
     
     // deallocate memory
-    tri.clean();
+    shape.clean();
 }
 
 void GlWindow::initializeGL()
@@ -113,6 +114,27 @@ void GlWindow::paintGL()
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_SHORT, 0);
+    mat4 modelTransformMatrix = glm::translate(mat4(), vec3(0.0f, 0.0f, -3.0f));
+    mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 10.0f);
+    
+    GLint modelTransformMatrixUniformLocation = glGetUniformLocation(ProgramID, "modelTransformMatrix");
+    GLint projectionMatrixUniformLocation = glGetUniformLocation(ProgramID, "projectionMatrix");
+    
+    glUniformMatrix4fv(
+        modelTransformMatrixUniformLocation,
+        1,
+        GL_FALSE,
+        (float*)((vec4 *)(&modelTransformMatrix)) // == &modelTransformMatrix[0][0]
+    );
+    
+    glUniformMatrix4fv(
+        projectionMatrixUniformLocation,
+        1,
+        GL_FALSE,
+        &projectionMatrix[0][0]
+    );
+
+    
+    glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
 }
 

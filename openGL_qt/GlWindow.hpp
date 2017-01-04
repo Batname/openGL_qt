@@ -33,6 +33,7 @@ private:
     std::string readShaderCode(const char * filePath);
     
     GLuint ProgramID;
+    GLuint numIndices;
 };
 
 
