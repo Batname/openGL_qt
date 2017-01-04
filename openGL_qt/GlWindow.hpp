@@ -26,6 +26,7 @@ protected:
     void initializeGL();
     void paintGL();
 public:
+    ~GlWindow();
     
 private:
     void sendDataToOpenGL();

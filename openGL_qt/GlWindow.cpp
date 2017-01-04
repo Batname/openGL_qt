@@ -63,6 +63,9 @@ void GlWindow::installShaders()
     }
     
     glUseProgram(ProgramID);
+    
+    glDeleteShader(vertexShaderID);
+    glDeleteShader(fragmentShaderID);
 }
 
 void GlWindow::sendDataToOpenGL()
@@ -131,3 +134,7 @@ void GlWindow::paintGL()
     glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
 }
 
+GlWindow::~GlWindow() {
+    glUseProgram(0);
+    glDeleteProgram(ProgramID);
+}
