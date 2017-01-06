@@ -157,8 +157,39 @@ void GlWindow::paintGL()
 
 void GlWindow::mouseMoveEvent(QMouseEvent* e) {
     vec2 vec(vec2(e->x(), e->y()));
-    camera.mouseUpdate(&vec);
+    camera.mouseUpdate(vec);
     repaint();
+}
+
+void GlWindow::keyPressEvent(QKeyEvent* e) {
+    switch (e->key()) {
+    case Qt::Key::Key_W:
+        camera.moveForward();
+        break;
+            
+    case Qt::Key::Key_S:
+        camera.moveBackward();
+        break;
+            
+    case Qt::Key::Key_A:
+        camera.strafeLeft();
+        break;
+
+    case Qt::Key::Key_D:
+        camera.strafeRight();
+        break;
+
+    case Qt::Key::Key_R:
+        camera.moveUp();
+        break;
+            
+    case Qt::Key::Key_F:
+        camera.moveDown();
+        break;
+    }
+    
+    repaint();
+    
 }
 
 GlWindow::~GlWindow() {
