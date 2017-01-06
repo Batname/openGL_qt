@@ -100,31 +100,6 @@ void GlWindow::sendDataToOpenGL()
     
     // deallocate memory
     shape.clean();
-    
-    GLuint transformationMatrixBufferId;
-    glGenBuffers(1, &transformationMatrixBufferId);
-    glBindBuffer(GL_ARRAY_BUFFER, transformationMatrixBufferId);
-    
-    glBufferData(GL_ARRAY_BUFFER, sizeof(mat4) * 2, 0, GL_DYNAMIC_DRAW);
-    
-    /*
-     2  |f|f|f|f| size = mat4 = 16; offset 0
-     3  |f|f|f|f| size = mat4 = 16; offset 4
-     4  |f|f|f|f| size = mat4 = 16; offset 8
-     5  |f|f|f|f| size = mat4 = 16; offset 12
-    */
-    glVertexAttribPointer(2, 4, GL_FLOAT, GL_FALSE, sizeof(mat4), (GLvoid*)(sizeof(float) * 0));
-    glVertexAttribPointer(3, 4, GL_FLOAT, GL_FALSE, sizeof(mat4), (GLvoid*)(sizeof(float) * 4));
-    glVertexAttribPointer(4, 4, GL_FLOAT, GL_FALSE, sizeof(mat4), (GLvoid*)(sizeof(float) * 8));
-    glVertexAttribPointer(5, 4, GL_FLOAT, GL_FALSE, sizeof(mat4), (GLvoid*)(sizeof(float) * 12));
-    glEnableVertexAttribArray(2);
-    glEnableVertexAttribArray(3);
-    glEnableVertexAttribArray(4);
-    glEnableVertexAttribArray(5);
-    glVertexAttribDivisor(2, 1);
-    glVertexAttribDivisor(3, 1);
-    glVertexAttribDivisor(4, 1);
-    glVertexAttribDivisor(5, 1);
 }
 
 void GlWindow::initializeGL()
@@ -142,20 +117,50 @@ void GlWindow::initializeGL()
 
 void GlWindow::paintGL()
 {
-    mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 10.0f);
-    
-    mat4 fullTransforms[] = {
-        projectionMatrix * camera.getWorldToMatrix() * glm::translate(vec3(-1.0f, 0.0f, -3.0f)) * glm::rotate(glm::radians(36.0f), vec3(1.0f, 0.0f, 0.0f)),
-        projectionMatrix * camera.getWorldToMatrix() * glm::translate(vec3(1.0f, 0.0f, -3.75f)) * glm::rotate(glm::radians(126.0f), vec3(0.0f, 1.0f, 0.0f))
-    };
-    
-    glBufferData(GL_ARRAY_BUFFER, sizeof(fullTransforms), fullTransforms, GL_DYNAMIC_DRAW);
-    
     // clear
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-     glDrawElementsInstanced(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0, 2);
+    GLint fullTransformMatrixUniformLocation = glGetUniformLocation(ProgramID, "fullTransformMatrix");
+    
+    mat4 fullTransformMatrix;
+    mat4 viewToProjecitonMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 10.0f);
+    mat4 worldToViewMatrix = camera.getWorldToMatrix();
+    mat4 worldToProjectionMatrix = viewToProjecitonMatrix * worldToViewMatrix;
+    
+    /* ----- Cube 1 ----- */
+    mat4 cube1ModelToWorldMatrix =
+        glm::translate(vec3(-1.0f, 0.0f, -3.0f)) *
+        glm::rotate(glm::radians(36.0f), vec3(1.0f, 0.0f, 0.0f));
+    
+    fullTransformMatrix = worldToProjectionMatrix * cube1ModelToWorldMatrix;
+    
+    glUniformMatrix4fv(
+                       fullTransformMatrixUniformLocation,
+                       1,
+                       GL_FALSE,
+                       (float*)((vec4 *)(&fullTransformMatrix)) // == &fullTransformMatrix[0][0]
+                       );
+    
+    glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
+    /* ----- Cube 1 ----- */
+    
+    /* ----- Cube 2 ----- */
+    mat4 cube2ModelToWorldMatrix =
+        glm::translate(vec3(1.0f, 0.0f, -3.75f)) *
+        glm::rotate(glm::radians(126.0f), vec3(0.0f, 1.0f, 0.0f));
+    
+    fullTransformMatrix = worldToProjectionMatrix * cube2ModelToWorldMatrix;
+    
+    glUniformMatrix4fv(
+                       fullTransformMatrixUniformLocation,
+                       1,
+                       GL_FALSE,
+                       (float*)((vec4 *)(&fullTransformMatrix)) // == &fullTransformMatrix[0][0]
+                       );
+    
+    glDrawElements(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0);
+     /* ----- Cube 2 ----- */
 }
 
 void GlWindow::mouseMoveEvent(QMouseEvent* e) {
