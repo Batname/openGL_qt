@@ -16,6 +16,7 @@ class ShapeGenerator
 public:
     static ShapeData makeTrianle();
     static ShapeData makeCube();
+    static ShapeData makeArrow();
 };
 
 #endif /* ShapeGenerator_hpp */

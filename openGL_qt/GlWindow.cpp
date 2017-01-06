@@ -3,6 +3,9 @@
 using namespace std;
 using namespace glm;
 
+const uint NUM_VERTICES_PER_TRI = 3;
+const uint NUM_FLOATS_PER_VERTICE = 9;
+const uint VERTEX_BYTE_SIZE = NUM_FLOATS_PER_VERTICE * sizeof(float);
 
 std::string GlWindow::readShaderCode(const char * filePath)
 {
@@ -88,11 +91,11 @@ void GlWindow::sendDataToOpenGL()
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, shape.indexBufferSize(), shape.indices, GL_STATIC_DRAW);
     
     GLint positionAttrib = glGetAttribLocation(ProgramID, "position"); // 0
-    glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)0);
+    glVertexAttribPointer(positionAttrib, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (GLvoid*)0);
     glEnableVertexAttribArray(positionAttrib);
     
     GLint colorAttrib = glGetAttribLocation(ProgramID, "color"); // 1
-    glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
+    glVertexAttribPointer(colorAttrib, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (char*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(colorAttrib);
     
     // deallocate memory
