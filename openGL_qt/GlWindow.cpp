@@ -157,7 +157,7 @@ void GlWindow::paintGL()
 
 void GlWindow::mouseMoveEvent(QMouseEvent* e) {
     vec2 vec(vec2(e->x(), e->y()));
-    camera.mouseUpdate(vec);
+    camera.mouseUpdate(&vec);
     repaint();
 }
 

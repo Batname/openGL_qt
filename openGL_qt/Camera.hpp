@@ -9,7 +9,7 @@ public:
     Camera();
     
     mat4 getWorldToMatrix() const;
-    void mouseUpdate(const vec2& newMousePosition);
+    void mouseUpdate(const vec2* newMousePosition);
     
     void moveForward();
     void moveBackward();

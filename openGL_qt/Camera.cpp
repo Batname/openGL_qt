@@ -13,11 +13,11 @@ mat4 Camera::getWorldToMatrix() const {
     return glm::lookAt(position, position + viewDirection, UP);
 }
 
-void Camera::mouseUpdate(const vec2& newMousePosition) {
+void Camera::mouseUpdate(const vec2* newMousePosition) {
 
-    vec2 mouseDelta = newMousePosition - oldMousePosition;
+    vec2 mouseDelta = *newMousePosition - oldMousePosition;
     if(length(mouseDelta) > 50.0f) {
-        oldMousePosition = newMousePosition;
+        oldMousePosition = *newMousePosition;
         return;
     }
     
@@ -27,7 +27,7 @@ void Camera::mouseUpdate(const vec2& newMousePosition) {
     
     viewDirection = mat3(rotator) * viewDirection;
 
-    oldMousePosition = newMousePosition;
+    oldMousePosition = *newMousePosition;
 }
 
 void Camera::moveForward() {
