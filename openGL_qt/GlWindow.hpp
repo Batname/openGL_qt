@@ -17,15 +17,18 @@
 #include <glm/gtx/transform.hpp>
 
 #include <QtOpenGL/qgl.h>
+#include <QtGui/qevent.h>
 
 #include "Vertex.h"
 #include "ShapeGenerator.hpp"
+#include "Camera.hpp"
 
 class GlWindow : public QGLWidget
 {
 protected:
     void initializeGL();
     void paintGL();
+    void mouseMoveEvent(QMouseEvent*);
 public:
     ~GlWindow();
     
@@ -36,6 +39,7 @@ private:
     
     GLuint ProgramID;
     GLuint numIndices;
+    Camera camera;
 };
 
 

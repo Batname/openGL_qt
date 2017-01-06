@@ -102,16 +102,7 @@ void GlWindow::sendDataToOpenGL()
     glGenBuffers(1, &transformationMatrixBufferId);
     glBindBuffer(GL_ARRAY_BUFFER, transformationMatrixBufferId);
     
-    
-    mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 10.0f);
-    mat4 scaleMatrix = glm::scale(mat4(), vec3(0.5f, 0.5f, 0.5f));
-
-    mat4 fullTransforms[] = {
-        projectionMatrix * glm::translate(vec3(-1.0f, 0.0f, -3.0f)) * glm::rotate(glm::radians(36.0f), vec3(1.0f, 0.0f, 0.0f)) * scaleMatrix,
-        projectionMatrix * glm::translate(vec3(1.0f, 0.0f, -3.75f)) * glm::rotate(glm::radians(126.0f), vec3(0.0f, 1.0f, 0.0f)) * scaleMatrix
-    };
-    
-    glBufferData(GL_ARRAY_BUFFER, sizeof(fullTransforms), fullTransforms, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(mat4) * 2, 0, GL_DYNAMIC_DRAW);
     
     /*
      2  |f|f|f|f| size = mat4 = 16; offset 0
@@ -135,6 +126,7 @@ void GlWindow::sendDataToOpenGL()
 
 void GlWindow::initializeGL()
 {
+    setMouseTracking(true);
     glewExperimental = GL_TRUE;
     assert(glewInit() == GLEW_OK && "Failed to inin glew with experemental");
     
@@ -147,11 +139,26 @@ void GlWindow::initializeGL()
 
 void GlWindow::paintGL()
 {
+    mat4 projectionMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 10.0f);
+    
+    mat4 fullTransforms[] = {
+        projectionMatrix * camera.getWorldToMatrix() * glm::translate(vec3(-1.0f, 0.0f, -3.0f)) * glm::rotate(glm::radians(36.0f), vec3(1.0f, 0.0f, 0.0f)),
+        projectionMatrix * camera.getWorldToMatrix() * glm::translate(vec3(1.0f, 0.0f, -3.75f)) * glm::rotate(glm::radians(126.0f), vec3(0.0f, 1.0f, 0.0f))
+    };
+    
+    glBufferData(GL_ARRAY_BUFFER, sizeof(fullTransforms), fullTransforms, GL_DYNAMIC_DRAW);
+    
     // clear
     glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
      glDrawElementsInstanced(GL_TRIANGLES, numIndices, GL_UNSIGNED_SHORT, 0, 2);
+}
+
+void GlWindow::mouseMoveEvent(QMouseEvent* e) {
+    vec2 vec(vec2(e->x(), e->y()));
+    camera.mouseUpdate(&vec);
+    repaint();
 }
 
 GlWindow::~GlWindow() {
