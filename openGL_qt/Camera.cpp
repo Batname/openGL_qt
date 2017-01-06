@@ -14,6 +14,10 @@ mat4 Camera::getWorldToMatrix() const {
 void Camera::mouseUpdate(const vec2* newMousePosition) {
 
     vec2 mouseDelta = *newMousePosition - *oldMousePosition;
+    if(length(mouseDelta) > 50.0f) {
+        *oldMousePosition = *newMousePosition;
+        return;
+    }
     viewDirection = mat3(rotate(radians(-mouseDelta.x * 0.5f), UP)) * viewDirection;
     *oldMousePosition = *newMousePosition;
 }
