@@ -214,6 +214,8 @@ void GlWindow::keyPressEvent(QKeyEvent* e) {
 }
 
 GlWindow::~GlWindow() {
+    glDeleteBuffers(1, &theBufferID);
+    
     glUseProgram(0);
     glDeleteProgram(ProgramID);
 }
