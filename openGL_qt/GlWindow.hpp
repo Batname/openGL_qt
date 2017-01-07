@@ -40,14 +40,18 @@ private:
     std::string readShaderCode(const char * filePath);
     
     GLuint ProgramID;
-    GLuint cubeNumIndices;
-    GLuint arrowNumIndices;
     GLuint theBufferID;
-    GLuint cubeVertexArrayObjectID;
+    GLuint teapotNumIndices;
+    GLuint arrowNumIndices;
+    GLuint planeNumIndices;
+    GLuint teapotVertexArrayObjectID;
     GLuint arrowVertexArrayObjectID;
-    GLuint fullTransformMatrixLocation;
+    GLuint planeVertexArrayObjectID;
     GLuint arrowIndexDataBuffetOffset;
-    GLuint cubeIndexDataBuffetOffset;
+    GLuint teapotIndexDataBuffetOffset;
+    GLuint planeIndexDataBuffetOffset;
+    
+    GLuint fullTransformMatrixLocation;
 
     Camera camera;
 };
