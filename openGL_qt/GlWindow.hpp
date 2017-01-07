@@ -42,12 +42,12 @@ private:
     GLuint ProgramID;
     GLuint cubeNumIndices;
     GLuint arrowNumIndices;
-    GLuint theVertexBufferID;
-    GLuint theIndexBufferID;
+    GLuint theBufferID;
     GLuint cubeVertexArrayObjectID;
     GLuint arrowVertexArrayObjectID;
     GLuint fullTransformMatrixLocation;
     GLuint arrowIndexDataBuffetOffset;
+    GLuint cubeIndexDataBuffetOffset;
 
     Camera camera;
 };

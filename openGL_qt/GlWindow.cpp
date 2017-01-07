@@ -3,7 +3,7 @@
 using namespace std;
 using namespace glm;
 
-const uint NUM_VERTICES_PER_TRI = 3;
+//const uint NUM_VERTICES_PER_TRI = 3;
 const uint NUM_FLOATS_PER_VERTICE = 9;
 const uint VERTEX_BYTE_SIZE = NUM_FLOATS_PER_VERTICE * sizeof(float);
 
@@ -76,23 +76,24 @@ void GlWindow::sendDataToOpenGL()
     ShapeData cube = ShapeGenerator::makeCube();
     ShapeData arrow  = ShapeGenerator::makeArrow();
 
-    glGenBuffers(1, &theVertexBufferID);
-    glBindBuffer(GL_ARRAY_BUFFER, theVertexBufferID);
-    glBufferData(GL_ARRAY_BUFFER, cube.vertexBufferSize() + arrow.vertexBufferSize(), 0, GL_STATIC_DRAW);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, cube.vertexBufferSize(), cube.vertices);
-    glBufferSubData(GL_ARRAY_BUFFER, cube.vertexBufferSize(), arrow.vertexBufferSize(), arrow.vertices);
-
-    glGenBuffers(1, &theIndexBufferID);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, cube.indexBufferSize() + arrow.indexBufferSize(), 0, GL_STATIC_DRAW);
-    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, cube.indexBufferSize(), cube.indices);
-    glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, cube.indexBufferSize(), arrow.indexBufferSize(), arrow.indices);
+    glGenBuffers(1, &theBufferID);
+    glBindBuffer(GL_ARRAY_BUFFER, theBufferID);
+    glBufferData(GL_ARRAY_BUFFER,
+                 cube.vertexBufferSize() + cube.indexBufferSize() +
+                 arrow.vertexBufferSize() + arrow.indexBufferSize(),
+    0, GL_STATIC_DRAW);
     
+    GLsizeiptr currentOffset = 0;
+    glBufferSubData(GL_ARRAY_BUFFER, currentOffset, cube.vertexBufferSize(), cube.vertices);
+    currentOffset += cube.vertexBufferSize();
+    glBufferSubData(GL_ARRAY_BUFFER, currentOffset, cube.indexBufferSize(), cube.indices);
+    currentOffset += cube.indexBufferSize();
+    glBufferSubData(GL_ARRAY_BUFFER, currentOffset, arrow.vertexBufferSize(), arrow.vertices);
+    currentOffset += arrow.vertexBufferSize();
+    glBufferSubData(GL_ARRAY_BUFFER, currentOffset, arrow.indexBufferSize(), arrow.indices);
     
     cubeNumIndices = cube.numIndices;
     arrowNumIndices = arrow.numIndices;
-    
-
 
     glGenVertexArrays(1, &cubeVertexArrayObjectID);
     glGenVertexArrays(1, &arrowVertexArrayObjectID);
@@ -100,20 +101,22 @@ void GlWindow::sendDataToOpenGL()
     glBindVertexArray(cubeVertexArrayObjectID);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, theVertexBufferID);
+    glBindBuffer(GL_ARRAY_BUFFER, theBufferID);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (char*)(3 * sizeof(GLfloat)));
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theBufferID);
     
     glBindVertexArray(arrowVertexArrayObjectID);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, theVertexBufferID);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)cube.vertexBufferSize());
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)(cube.vertexBufferSize() + 3 * sizeof(float)));
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theIndexBufferID);
-    
-    arrowIndexDataBuffetOffset = static_cast<GLuint>(cube.indexBufferSize());
+    glBindBuffer(GL_ARRAY_BUFFER, theBufferID);
+    GLuint arrowByteOffset = cube.vertexBufferSize() + cube.indexBufferSize();
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)arrowByteOffset);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)(arrowByteOffset + 3 * sizeof(float)));
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theBufferID);
+
+    cubeIndexDataBuffetOffset = cube.vertexBufferSize();
+    arrowIndexDataBuffetOffset = arrowByteOffset + arrow.vertexBufferSize();
     
     // deallocate memory
     cube.clean();
@@ -154,14 +157,14 @@ void GlWindow::paintGL()
     
     fullTransformMatrix = worldToProjectionMatrix * cube1ModelToWorldMatrix;
     glUniformMatrix4fv(fullTransformMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
-    glDrawElements(GL_TRIANGLES, cubeNumIndices, GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_TRIANGLES, cubeNumIndices, GL_UNSIGNED_SHORT, (void*)cubeIndexDataBuffetOffset);
     
     mat4 cube2ModelToWorldMatrix =
         glm::translate(vec3(2.0f, 0.0f, -3.75f)) *
         glm::rotate(glm::radians(126.0f), vec3(0.0f, 1.0f, 0.0f));
     fullTransformMatrix = worldToProjectionMatrix * cube2ModelToWorldMatrix;
     glUniformMatrix4fv(fullTransformMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
-    glDrawElements(GL_TRIANGLES, cubeNumIndices, GL_UNSIGNED_SHORT, 0);
+    glDrawElements(GL_TRIANGLES, cubeNumIndices, GL_UNSIGNED_SHORT, (void*)cubeIndexDataBuffetOffset);
 
 
     /* ----- Arrow ----- */

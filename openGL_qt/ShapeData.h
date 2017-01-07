@@ -14,12 +14,12 @@ struct ShapeData
     GLushort *indices;
     GLuint numIndices;
     
-    GLsizeiptr vertexBufferSize() const
+    GLuint vertexBufferSize() const
     {
         return numVertices * sizeof(Vertex);
     }
     
-    GLsizeiptr indexBufferSize() const
+    GLuint indexBufferSize() const
     {
         return numIndices * sizeof(GLushort);
     }
