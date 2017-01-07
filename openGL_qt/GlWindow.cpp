@@ -73,7 +73,7 @@ void GlWindow::installShaders()
 
 void GlWindow::sendDataToOpenGL()
 {
-    ShapeData cube = ShapeGenerator::makePlane();
+    ShapeData cube = ShapeGenerator::makeTeapot();
     ShapeData arrow  = ShapeGenerator::makeArrow();
 
     glGenBuffers(1, &theBufferID);

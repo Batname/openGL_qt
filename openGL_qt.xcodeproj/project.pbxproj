@@ -52,6 +52,7 @@
 		185DD02E1E09D83B0014CB12 /* ShapeGenerator.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ShapeGenerator.hpp; sourceTree = "<group>"; };
 		1874D45B1E20218200643E12 /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 		1874D45C1E20218200643E12 /* Camera.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
+		1874D45E1E21365400643E12 /* TeapotData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeapotData.h; sourceTree = "<group>"; };
 		18B081DC1E06826A00669944 /* openGL_qt */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = openGL_qt; sourceTree = BUILT_PRODUCTS_DIR; };
 		18B081DF1E06826A00669944 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		18B081FA1E068CB000669944 /* libGLEW.2.0.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libGLEW.2.0.0.dylib; path = ../../../../../usr/local/Cellar/glew/2.0.0/lib/libGLEW.2.0.0.dylib; sourceTree = "<group>"; };
@@ -101,6 +102,7 @@
 				185DD02C1E09D6360014CB12 /* ShapeData.h */,
 				185DD02D1E09D83B0014CB12 /* ShapeGenerator.cpp */,
 				185DD02E1E09D83B0014CB12 /* ShapeGenerator.hpp */,
+				1874D45E1E21365400643E12 /* TeapotData.h */,
 			);
 			name = Primitives;
 			sourceTree = "<group>";
