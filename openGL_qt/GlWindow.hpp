@@ -36,12 +36,14 @@ public:
 private:
     void sendDataToOpenGL();
     void installShaders();
+    void setupVertexArray();
     std::string readShaderCode(const char * filePath);
     
     GLuint ProgramID, cubeNumIndices, arrowNumIndices;
-    GLuint vertexArrayObjectID;
     GLuint cubeVertexBufferID, cubeIndexBufferID;
     GLuint arrowVertexBufferID, arrowIndexBufferID;
+    GLuint cubeVertexArrayObjectID, arrowVertexArrayObjectID;
+    GLuint fullTransformMatrixLocation;
 
     Camera camera;
 };
