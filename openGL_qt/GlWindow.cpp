@@ -73,7 +73,7 @@ void GlWindow::installShaders()
 
 void GlWindow::sendDataToOpenGL()
 {
-    ShapeData cube = ShapeGenerator::makeCube();
+    ShapeData cube = ShapeGenerator::makePlane();
     ShapeData arrow  = ShapeGenerator::makeArrow();
 
     glGenBuffers(1, &theBufferID);
@@ -145,7 +145,7 @@ void GlWindow::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     mat4 fullTransformMatrix;
-    mat4 viewToProjecitonMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 10.0f);
+    mat4 viewToProjecitonMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 20.0f);
     mat4 worldToViewMatrix = camera.getWorldToMatrix();
     mat4 worldToProjectionMatrix = viewToProjecitonMatrix * worldToViewMatrix;
     

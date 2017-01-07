@@ -13,10 +13,15 @@
 
 class ShapeGenerator
 {
+private:
+    static ShapeData makePlaneVerts(uint dimensions);
+    static ShapeData makePlaneIndices(uint dimensions);
+
 public:
     static ShapeData makeTrianle();
     static ShapeData makeCube();
     static ShapeData makeArrow();
+    static ShapeData makePlane(uint dimensions = 10);
 };
 
 #endif /* ShapeGenerator_hpp */
