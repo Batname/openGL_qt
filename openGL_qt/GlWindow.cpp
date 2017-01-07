@@ -166,12 +166,12 @@ void GlWindow::paintGL()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     mat4 fullTransformMatrix;
-    mat4 viewToProjecitonMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 20.0f);
+    mat4 viewToProjecitonMatrix = glm::perspective(glm::radians(60.0f), ((float)width()) / height(), 0.1f, 50.0f);
     mat4 worldToViewMatrix = camera.getWorldToMatrix();
     mat4 worldToProjectionMatrix = viewToProjecitonMatrix * worldToViewMatrix;
     
     GLuint ambientLightUniformLocation = glGetUniformLocation(ProgramID, "ambientLight");
-    vec3 ambientLight(1.0f, 1.0f, 1.0f);
+    vec3 ambientLight(0.3f, 0.3f, 0.3f);
     glUniform3fv(ambientLightUniformLocation, 1, &ambientLight[0]);
     
     /* ----- teapots ----- */
