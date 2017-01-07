@@ -38,8 +38,11 @@ private:
     void installShaders();
     std::string readShaderCode(const char * filePath);
     
-    GLuint ProgramID;
-    GLuint numIndices;
+    GLuint ProgramID, cubeNumIndices, arrowNumIndices;
+    GLuint vertexArrayObjectID;
+    GLuint cubeVertexBufferID, cubeIndexBufferID;
+    GLuint arrowVertexBufferID, arrowIndexBufferID;
+
     Camera camera;
 };
 
