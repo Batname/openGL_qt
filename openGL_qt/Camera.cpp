@@ -4,7 +4,8 @@ Camera::Camera():
     viewDirection(0.0f, 0.0f, -1.0f),
     UP(0.0f, 1.0f, 0.0f),
     ROTATIONAL_SPEED(0.5f),
-    MOVEMENT_SPEED(0.1f)
+    MOVEMENT_SPEED(0.5f),
+    position(0.0f, 1.0f, 0.0f)
 {
 
 }
