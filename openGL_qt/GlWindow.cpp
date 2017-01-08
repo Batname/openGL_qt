@@ -163,6 +163,7 @@ void GlWindow::initializeGL()
     installShaders();
     
     fullTransformMatrixLocation = glGetUniformLocation(ProgramID, "fullTransformMatrix");
+    modelToWorldTransformMatrixUniformLocation = glGetUniformLocation(ProgramID, "modelToWorldTransformMatrix");
 }
 
 void GlWindow::paintGL()
@@ -180,7 +181,7 @@ void GlWindow::paintGL()
     vec3 ambientLight(0.9f, 0.9f, 0.9f);
     glUniform3fv(ambientLightUniformLocation, 1, &ambientLight[0]);
     GLuint lightPositionUniformLocation = glGetUniformLocation(ProgramID, "lightPosition");
-    vec3 lightPosition(0.0f, 3.0f, 0.0f);
+    vec3 lightPosition(0.0f, 1.0f, 0.0f);
     glUniform3fv(lightPositionUniformLocation, 1, &lightPosition[0]);
     
     /* ----- teapots ----- */
@@ -203,18 +204,20 @@ void GlWindow::paintGL()
 
     /* ----- Arrow ----- */
     glBindVertexArray(arrowVertexArrayObjectID);
-    mat4 arrowModelToWorldMatrix = glm::translate(vec3(0.0f, 1.0f, -3.0f));
+    mat4 arrowModelToWorldMatrix = glm::translate(vec3(0.0f, 1.0f, -8.0f));
     fullTransformMatrix = worldToProjectionMatrix * arrowModelToWorldMatrix;
 
     glUniformMatrix4fv(fullTransformMatrixLocation,1,GL_FALSE,&fullTransformMatrix[0][0]);
-//    glDrawElements(GL_TRIANGLES, arrowNumIndices, GL_UNSIGNED_SHORT, (void*)arrowIndexDataBuffetOffset);
+    glUniformMatrix4fv(modelToWorldTransformMatrixUniformLocation, 1, GL_FALSE, &arrowModelToWorldMatrix[0][0]);
+    glDrawElements(GL_TRIANGLES, arrowNumIndices, GL_UNSIGNED_SHORT, (void*)arrowIndexDataBuffetOffset);
     
     /* ----- plane ----- */
     glBindVertexArray(planeVertexArrayObjectID);
-    mat4 planeModelToWorldMatrix = glm::mat4();
+    mat4 planeModelToWorldMatrix;
     fullTransformMatrix = worldToProjectionMatrix * planeModelToWorldMatrix;
     
     glUniformMatrix4fv(fullTransformMatrixLocation, 1, GL_FALSE, &fullTransformMatrix[0][0]);
+    glUniformMatrix4fv(modelToWorldTransformMatrixUniformLocation, 1, GL_FALSE, &planeModelToWorldMatrix[0][0]);
     glDrawElements(GL_TRIANGLES, planeNumIndices, GL_UNSIGNED_SHORT, (void*)planeIndexDataBuffetOffset);
 }
 

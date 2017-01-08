@@ -52,6 +52,7 @@ private:
     GLuint planeIndexDataBuffetOffset;
     
     GLuint fullTransformMatrixLocation;
+    GLuint modelToWorldTransformMatrixUniformLocation;
 
     Camera camera;
 };
