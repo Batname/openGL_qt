@@ -7,7 +7,7 @@ layout (location = 2) in vec3 normalModel;
 uniform vec3 ambientLight;
 
 uniform mat4 modelToProjectionMatrix;
-uniform mat4 modelToWorldTransformMatrix;
+uniform mat4 modelToWorldMatrix;
 
 
 out vec3 theNormal;
@@ -17,6 +17,6 @@ void main()
 {
     vec4 v = vec4(vertexPositionModel, 1.0);
     gl_Position = modelToProjectionMatrix * v;
-    theNormal = vec3(modelToWorldTransformMatrix * vec4(normalModel, 0.0f));
-    thePosition = vec3(modelToWorldTransformMatrix * v);
+    theNormal = vec3(modelToWorldMatrix * vec4(normalModel, 0.0f));
+    thePosition = vec3(modelToWorldMatrix * v);
 }

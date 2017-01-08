@@ -163,7 +163,7 @@ void GlWindow::initializeGL()
     installShaders();
     
     modelToProjectionMatrixLocation = glGetUniformLocation(ProgramID, "modelToProjectionMatrix");
-    modelToWorldTransformMatrixUniformLocation = glGetUniformLocation(ProgramID, "modelToWorldTransformMatrix");
+    modelToWorldMatrixLocation = glGetUniformLocation(ProgramID, "modelToWorldMatrix");
 }
 
 void GlWindow::paintGL()
@@ -209,7 +209,7 @@ void GlWindow::paintGL()
     fullTransformMatrix = worldToProjectionMatrix * arrowModelToWorldMatrix;
 
     glUniformMatrix4fv(modelToProjectionMatrixLocation,1,GL_FALSE,&fullTransformMatrix[0][0]);
-    glUniformMatrix4fv(modelToWorldTransformMatrixUniformLocation, 1, GL_FALSE, &arrowModelToWorldMatrix[0][0]);
+    glUniformMatrix4fv(modelToWorldMatrixLocation, 1, GL_FALSE, &arrowModelToWorldMatrix[0][0]);
     glDrawElements(GL_TRIANGLES, arrowNumIndices, GL_UNSIGNED_SHORT, (void*)arrowIndexDataBuffetOffset);
     
     /* ----- plane ----- */
@@ -218,7 +218,7 @@ void GlWindow::paintGL()
     fullTransformMatrix = worldToProjectionMatrix * planeModelToWorldMatrix;
     
     glUniformMatrix4fv(modelToProjectionMatrixLocation, 1, GL_FALSE, &fullTransformMatrix[0][0]);
-    glUniformMatrix4fv(modelToWorldTransformMatrixUniformLocation, 1, GL_FALSE, &planeModelToWorldMatrix[0][0]);
+    glUniformMatrix4fv(modelToWorldMatrixLocation, 1, GL_FALSE, &planeModelToWorldMatrix[0][0]);
     glDrawElements(GL_TRIANGLES, planeNumIndices, GL_UNSIGNED_SHORT, (void*)planeIndexDataBuffetOffset);
 }
 
