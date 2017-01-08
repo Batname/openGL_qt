@@ -204,7 +204,8 @@ void GlWindow::paintGL()
 
     /* ----- Arrow ----- */
     glBindVertexArray(arrowVertexArrayObjectID);
-    mat4 arrowModelToWorldMatrix = glm::translate(vec3(0.0f, 1.0f, -8.0f));
+    mat4 arrowModelToWorldMatrix = glm::translate(vec3(0.0f, 1.0f, -8.0f)) *
+                                   glm::rotate(radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
     fullTransformMatrix = worldToProjectionMatrix * arrowModelToWorldMatrix;
 
     glUniformMatrix4fv(fullTransformMatrixLocation,1,GL_FALSE,&fullTransformMatrix[0][0]);
