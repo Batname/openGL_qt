@@ -177,9 +177,9 @@ void GlWindow::paintGL()
     mat4 worldToViewMatrix = camera.getWorldToMatrix();
     mat4 worldToProjectionMatrix = viewToProjecitonMatrix * worldToViewMatrix;
     
-    GLuint ambientLightUniformLocation = glGetUniformLocation(ProgramID, "ambientLight");
-    vec3 ambientLight(0.9f, 0.9f, 0.9f);
-    glUniform3fv(ambientLightUniformLocation, 1, &ambientLight[0]);
+    GLuint ambientLightLocation = glGetUniformLocation(ProgramID, "ambientLight");
+    vec4 ambientLight(0.05f, 0.05f, 0.05f, 1.0f);
+    glUniform4fv(ambientLightLocation, 1, &ambientLight[0]);
     GLuint lightPositionWorldLocation = glGetUniformLocation(ProgramID, "lightPositionWorld");
     vec3 lightPositionWorld(0.0f, 1.0f, 0.0f);
     glUniform3fv(lightPositionWorldLocation, 1, &lightPositionWorld[0]);
