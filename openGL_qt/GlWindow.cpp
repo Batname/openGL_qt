@@ -192,15 +192,16 @@ void GlWindow::paintGL()
     
     fullTransformMatrix = worldToProjectionMatrix * teapot1ModelToWorldMatrix;
     glUniformMatrix4fv(modelToProjectionMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
-//    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
-    
+    glUniformMatrix4fv(modelToWorldMatrixLocation, 1, GL_FALSE, &teapot1ModelToWorldMatrix[0][0]);
+    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
+
     mat4 teapot2ModelToWorldMatrix =
         glm::translate(vec3(3.0f, 0.0f, -6.75f)) *
         glm::rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
     fullTransformMatrix = worldToProjectionMatrix * teapot2ModelToWorldMatrix;
     glUniformMatrix4fv(modelToProjectionMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
-//    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
-
+    glUniformMatrix4fv(modelToWorldMatrixLocation, 1, GL_FALSE, &teapot2ModelToWorldMatrix[0][0]);
+    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
 
     /* ----- Arrow ----- */
     glBindVertexArray(arrowVertexArrayObjectID);
