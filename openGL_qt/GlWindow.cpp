@@ -179,6 +179,9 @@ void GlWindow::paintGL()
     GLuint ambientLightUniformLocation = glGetUniformLocation(ProgramID, "ambientLight");
     vec3 ambientLight(0.9f, 0.9f, 0.9f);
     glUniform3fv(ambientLightUniformLocation, 1, &ambientLight[0]);
+    GLuint lightPositionUniformLocation = glGetUniformLocation(ProgramID, "lightPosition");
+    vec3 lightPosition(0.0f, 3.0f, 0.0f);
+    glUniform3fv(lightPositionUniformLocation, 1, &lightPosition[0]);
     
     /* ----- teapots ----- */
     glBindVertexArray(teapotVertexArrayObjectID);
@@ -188,14 +191,14 @@ void GlWindow::paintGL()
     
     fullTransformMatrix = worldToProjectionMatrix * teapot1ModelToWorldMatrix;
     glUniformMatrix4fv(fullTransformMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
-    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
+//    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
     
     mat4 teapot2ModelToWorldMatrix =
         glm::translate(vec3(3.0f, 0.0f, -6.75f)) *
         glm::rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
     fullTransformMatrix = worldToProjectionMatrix * teapot2ModelToWorldMatrix;
     glUniformMatrix4fv(fullTransformMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
-    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
+//    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
 
 
     /* ----- Arrow ----- */
@@ -204,7 +207,7 @@ void GlWindow::paintGL()
     fullTransformMatrix = worldToProjectionMatrix * arrowModelToWorldMatrix;
 
     glUniformMatrix4fv(fullTransformMatrixLocation,1,GL_FALSE,&fullTransformMatrix[0][0]);
-    glDrawElements(GL_TRIANGLES, arrowNumIndices, GL_UNSIGNED_SHORT, (void*)arrowIndexDataBuffetOffset);
+//    glDrawElements(GL_TRIANGLES, arrowNumIndices, GL_UNSIGNED_SHORT, (void*)arrowIndexDataBuffetOffset);
     
     /* ----- plane ----- */
     glBindVertexArray(planeVertexArrayObjectID);
