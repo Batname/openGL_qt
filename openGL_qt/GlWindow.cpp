@@ -180,9 +180,9 @@ void GlWindow::paintGL()
     GLuint ambientLightUniformLocation = glGetUniformLocation(ProgramID, "ambientLight");
     vec3 ambientLight(0.9f, 0.9f, 0.9f);
     glUniform3fv(ambientLightUniformLocation, 1, &ambientLight[0]);
-    GLuint lightPositionUniformLocation = glGetUniformLocation(ProgramID, "lightPosition");
-    vec3 lightPosition(0.0f, 1.0f, 0.0f);
-    glUniform3fv(lightPositionUniformLocation, 1, &lightPosition[0]);
+    GLuint lightPositionWorldLocation = glGetUniformLocation(ProgramID, "lightPositionWorld");
+    vec3 lightPositionWorld(0.0f, 1.0f, 0.0f);
+    glUniform3fv(lightPositionWorldLocation, 1, &lightPositionWorld[0]);
     
     /* ----- teapots ----- */
     glBindVertexArray(teapotVertexArrayObjectID);
