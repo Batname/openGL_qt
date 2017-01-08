@@ -51,7 +51,7 @@ private:
     GLuint teapotIndexDataBuffetOffset;
     GLuint planeIndexDataBuffetOffset;
     
-    GLuint fullTransformMatrixLocation;
+    GLuint modelToProjectionMatrixLocation;
     GLuint modelToWorldTransformMatrixUniformLocation;
 
     Camera camera;

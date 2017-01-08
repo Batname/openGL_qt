@@ -162,7 +162,7 @@ void GlWindow::initializeGL()
     sendDataToOpenGL();
     installShaders();
     
-    fullTransformMatrixLocation = glGetUniformLocation(ProgramID, "fullTransformMatrix");
+    modelToProjectionMatrixLocation = glGetUniformLocation(ProgramID, "modelToProjectionMatrix");
     modelToWorldTransformMatrixUniformLocation = glGetUniformLocation(ProgramID, "modelToWorldTransformMatrix");
 }
 
@@ -191,14 +191,14 @@ void GlWindow::paintGL()
         glm::rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
     
     fullTransformMatrix = worldToProjectionMatrix * teapot1ModelToWorldMatrix;
-    glUniformMatrix4fv(fullTransformMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
+    glUniformMatrix4fv(modelToProjectionMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
 //    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
     
     mat4 teapot2ModelToWorldMatrix =
         glm::translate(vec3(3.0f, 0.0f, -6.75f)) *
         glm::rotate(glm::radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
     fullTransformMatrix = worldToProjectionMatrix * teapot2ModelToWorldMatrix;
-    glUniformMatrix4fv(fullTransformMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
+    glUniformMatrix4fv(modelToProjectionMatrixLocation, 1, GL_FALSE, (float*)((vec4 *)(&fullTransformMatrix)));
 //    glDrawElements(GL_TRIANGLES, teapotNumIndices, GL_UNSIGNED_SHORT, (void*)teapotIndexDataBuffetOffset);
 
 
@@ -208,7 +208,7 @@ void GlWindow::paintGL()
                                    glm::rotate(radians(-90.0f), vec3(1.0f, 0.0f, 0.0f));
     fullTransformMatrix = worldToProjectionMatrix * arrowModelToWorldMatrix;
 
-    glUniformMatrix4fv(fullTransformMatrixLocation,1,GL_FALSE,&fullTransformMatrix[0][0]);
+    glUniformMatrix4fv(modelToProjectionMatrixLocation,1,GL_FALSE,&fullTransformMatrix[0][0]);
     glUniformMatrix4fv(modelToWorldTransformMatrixUniformLocation, 1, GL_FALSE, &arrowModelToWorldMatrix[0][0]);
     glDrawElements(GL_TRIANGLES, arrowNumIndices, GL_UNSIGNED_SHORT, (void*)arrowIndexDataBuffetOffset);
     
@@ -217,7 +217,7 @@ void GlWindow::paintGL()
     mat4 planeModelToWorldMatrix;
     fullTransformMatrix = worldToProjectionMatrix * planeModelToWorldMatrix;
     
-    glUniformMatrix4fv(fullTransformMatrixLocation, 1, GL_FALSE, &fullTransformMatrix[0][0]);
+    glUniformMatrix4fv(modelToProjectionMatrixLocation, 1, GL_FALSE, &fullTransformMatrix[0][0]);
     glUniformMatrix4fv(modelToWorldTransformMatrixUniformLocation, 1, GL_FALSE, &planeModelToWorldMatrix[0][0]);
     glDrawElements(GL_TRIANGLES, planeNumIndices, GL_UNSIGNED_SHORT, (void*)planeIndexDataBuffetOffset);
 }
