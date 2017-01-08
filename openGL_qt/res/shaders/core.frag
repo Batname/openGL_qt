@@ -9,7 +9,7 @@ uniform vec3 lightPositionWorld;
 
 void main()
 {
-    vec3 lightVector = normalize(lightPositionWorld - vertexPositionWorld);
-    float brightness = dot(lightVector, normalize(normalWorld));
+    vec3 lightVectorWorld = normalize(lightPositionWorld - vertexPositionWorld);
+    float brightness = dot(lightVectorWorld, normalize(normalWorld));
     color = vec4(brightness, brightness, brightness, 1.0);
 }
