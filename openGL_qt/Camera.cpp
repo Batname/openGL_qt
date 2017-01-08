@@ -1,11 +1,11 @@
 #include "Camera.hpp"
 
 Camera::Camera():
-    viewDirection(0.0f, 0.0f, -1.0f),
+    viewDirection(0.663740635f, -0.492421985f, 0.562995136f),
     UP(0.0f, 1.0f, 0.0f),
     ROTATIONAL_SPEED(0.5f),
     MOVEMENT_SPEED(0.5f),
-    position(0.0f, 1.0f, 0.0f)
+    position(-3.11094999f, 2.23070025f, -2.86016989f)
 {
 
 }
