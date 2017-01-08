@@ -110,27 +110,33 @@ void GlWindow::sendDataToOpenGL()
     glBindVertexArray(teapotVertexArrayObjectID);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
     glBindBuffer(GL_ARRAY_BUFFER, theBufferID);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)0);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (char*)(3 * sizeof(GLfloat)));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)(sizeof(float) * 6));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theBufferID);
     
     glBindVertexArray(arrowVertexArrayObjectID);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
     glBindBuffer(GL_ARRAY_BUFFER, theBufferID);
     GLuint arrowByteOffset = teapot.vertexBufferSize() + teapot.indexBufferSize();
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)arrowByteOffset);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)(arrowByteOffset + 3 * sizeof(float)));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)(arrowByteOffset +sizeof(float) * 6));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theBufferID);
     
     glBindVertexArray(planeVertexArrayObjectID);
     glEnableVertexAttribArray(0);
     glEnableVertexAttribArray(1);
+    glEnableVertexAttribArray(2);
     glBindBuffer(GL_ARRAY_BUFFER, theBufferID);
     GLuint planeByteOffset = teapot.vertexBufferSize() + teapot.indexBufferSize() + arrow.vertexBufferSize() + arrow.indexBufferSize();
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)planeByteOffset);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)(planeByteOffset + 3 * sizeof(float)));
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, VERTEX_BYTE_SIZE, (void*)(planeByteOffset + sizeof(float) * 6));
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, theBufferID);
 
     teapotIndexDataBuffetOffset = teapot.vertexBufferSize();
@@ -171,7 +177,7 @@ void GlWindow::paintGL()
     mat4 worldToProjectionMatrix = viewToProjecitonMatrix * worldToViewMatrix;
     
     GLuint ambientLightUniformLocation = glGetUniformLocation(ProgramID, "ambientLight");
-    vec3 ambientLight(0.3f, 0.3f, 0.3f);
+    vec3 ambientLight(0.9f, 0.9f, 0.9f);
     glUniform3fv(ambientLightUniformLocation, 1, &ambientLight[0]);
     
     /* ----- teapots ----- */
@@ -194,7 +200,7 @@ void GlWindow::paintGL()
 
     /* ----- Arrow ----- */
     glBindVertexArray(arrowVertexArrayObjectID);
-    mat4 arrowModelToWorldMatrix = glm::translate(vec3(0.0f, 0.0f, -3.0f));
+    mat4 arrowModelToWorldMatrix = glm::translate(vec3(0.0f, 1.0f, -3.0f));
     fullTransformMatrix = worldToProjectionMatrix * arrowModelToWorldMatrix;
 
     glUniformMatrix4fv(fullTransformMatrixLocation,1,GL_FALSE,&fullTransformMatrix[0][0]);
